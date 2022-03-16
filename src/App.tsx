@@ -1,11 +1,19 @@
 import React from 'react';
-import './App.css';
-
-import { signInWithAuthProvider } from './services/firebase/auth';
+import { Provider } from 'react-redux';
 import { Navigation } from './navigation';
+import { store } from './store';
+import { GlobalStyles } from './styled-components/globalStyles';
+
+import './App.css';
+//css
 
 function App() {
-  return <Navigation />;
+  return (
+    <Provider store={store}>
+      <GlobalStyles />
+      <Navigation />
+    </Provider>
+  );
 }
 
 export default App;

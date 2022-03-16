@@ -1,19 +1,19 @@
-import { GoogleAuthProvider, signInWithPopup, getAuth } from 'firebase/auth';
+import { createAsyncThunk } from '@reduxjs/toolkit';
+import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
+import { auth, provider } from '.';
 
-const provider = new GoogleAuthProvider();
-const auth = getAuth();
-
-export const signInWithAuthProvider = async (): Promise<any> => {
+export const signIn = createAsyncThunk('signIn', async (_, thunkAPI) => {
   try {
-    const result: any = await signInWithPopup(auth, provider);
+    const result = await signInWithPopup(auth, provider);
     const credential = GoogleAuthProvider.credentialFromResult(result);
     const token = credential?.accessToken;
     const user = result.user;
     return {
-      user,
+      uid: user.uid,
       token,
+      credential,
     };
   } catch (err) {
-    return err;
+    return thunkAPI.rejectWithValue({ err });
   }
-};
+});
