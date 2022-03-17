@@ -1,14 +1,15 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Login } from '../pages/Login/login';
+import { PublicRoute } from './PublicRoute';
+import { PrivateRoute } from './PrivateRoute';
+import { Home } from '../pages/Home';
 
 export const Navigation = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="login" element={<Login />} />
-        <Route path="newDay" element={<h1>About Page</h1>} />
-        <Route path="shceduleDay" element={<h1>About Page</h1>} />
-        <Route path="/*" element={<Navigate to="/login" replace />} />
+        <Route path="/home" element={<PrivateRoute component={<Home />} />} />
+        <Route path="/login" element={<PublicRoute component={<Login />} />} />
       </Routes>
     </BrowserRouter>
   );
