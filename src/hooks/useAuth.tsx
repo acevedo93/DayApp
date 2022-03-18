@@ -2,8 +2,11 @@ import { useEffect, useState } from 'react';
 
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth as firebaseAuth } from '../services/firebase';
+import { authLoadingSelector } from '../store/selectors/authSelector';
+import { useSelector } from 'react-redux';
 
 export const useAuth = () => {
+  const authLoading = useSelector(authLoadingSelector);
   const [auth, setAuth] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -14,7 +17,6 @@ export const useAuth = () => {
       } else {
         setAuth(false);
       }
-
       setLoading(false);
     });
   };
@@ -26,6 +28,10 @@ export const useAuth = () => {
       unsubscribe();
     };
   }, []);
+
+  useEffect(() => {
+    setLoading(authLoading);
+  }, [authLoading]);
 
   return [auth, loading];
 };
