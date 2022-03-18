@@ -5,9 +5,9 @@ import { authSelector } from '../store/selectors/authSelector';
 
 export interface Props {
   component: any;
+  isAuth: boolean;
 }
 
-export const PublicRoute = ({ component }: Props) => {
-  const isAuth = useSelector(authSelector);
+export const PublicRoute = ({ component, isAuth }: Props) => {
   return !isAuth ? component : <Navigate to="/home" />;
 };
