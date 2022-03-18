@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
+import { signInWithPopup, signOut, GoogleAuthProvider } from 'firebase/auth';
 import { auth, provider } from '.';
 
 export const signIn = createAsyncThunk('signIn', async (_, thunkAPI) => {
@@ -13,6 +13,14 @@ export const signIn = createAsyncThunk('signIn', async (_, thunkAPI) => {
       token,
       credential,
     };
+  } catch (err) {
+    return thunkAPI.rejectWithValue({ err });
+  }
+});
+
+export const logOut = createAsyncThunk('signOut', async (_, thunkAPI) => {
+  try {
+    signOut(auth);
   } catch (err) {
     return thunkAPI.rejectWithValue({ err });
   }

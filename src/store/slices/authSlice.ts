@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { OAuthCredential } from 'firebase/auth';
-import { signIn } from '../../services/firebase/auth';
+import { logOut, signIn } from '../../services/firebase/auth';
 
 export interface AuthState {
   uid: string;
@@ -25,6 +25,7 @@ export const authSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
+    //SIGNIN
     builder.addCase(signIn.pending, (state) => {
       state.loading = true;
     });
@@ -39,6 +40,26 @@ export const authSlice = createSlice({
     });
 
     builder.addCase(signIn.rejected, (state, action) => {
+      state.error = '';
+      state.loading = false;
+    });
+
+    //LOGOUT
+
+    builder.addCase(logOut.pending, (state, action) => {
+      state.loading = true;
+    });
+
+    builder.addCase(logOut.fulfilled, (state, action) => {
+      state.loading = false;
+      state.authenticated = false;
+      state.error = '';
+      state.credential = null;
+      state.uid = '';
+      state.token = null;
+    });
+
+    builder.addCase(logOut.rejected, (state, action) => {
       state.error = '';
       state.loading = false;
     });

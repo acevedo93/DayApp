@@ -1,3 +1,15 @@
+import { useDispatch } from 'react-redux';
+import { logOut } from '../../services/firebase/auth';
+
 export const Home = () => {
-  return <h1>Hola soy el home</h1>;
+  const dispath = useDispatch();
+  const handleLogout = () => {
+    dispath(logOut());
+  };
+  return (
+    <div>
+      <h1>home</h1>
+      <button onClick={handleLogout}>Salir</button>
+    </div>
+  );
 };
