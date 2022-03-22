@@ -10,7 +10,7 @@ import { customTheme } from './styles/globalStyles';
 function App() {
   return (
     <Provider store={store}>
-      <ChakraProvider theme={customTheme}>
+      <ChakraProvider resetCSS theme={customTheme}>
         <Navigation />
       </ChakraProvider>
     </Provider>
