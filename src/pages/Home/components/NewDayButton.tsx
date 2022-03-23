@@ -1,4 +1,4 @@
-import { Center, Text, Box } from '@chakra-ui/react';
+import { Text, Box } from '@chakra-ui/react';
 
 export const NewDayButton = () => {
   const handleNewDay = () => {
@@ -8,10 +8,10 @@ export const NewDayButton = () => {
     <Box
       onClick={handleNewDay}
       bg="neutral.25"
-      borderRadius="20"
-      borderStyle="dashed"
-      borderWidth="2"
-      borderColor="neutral.200"
+      borderRadius="10"
+      borderWidth="2px"
+      borderStyle="dotted"
+      borderColor="accent.100"
       display="flex"
       justifyContent="center"
       alignItems="center"
