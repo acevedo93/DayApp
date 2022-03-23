@@ -14,9 +14,9 @@ export const HourBlock = ({ scheduleBlock }: Props) => {
           {scheduleBlock.hour}
         </Text>
         <VStack width="100%">
-          <HalfHourBlock />
-
-          <HalfHourBlock />
+          {scheduleBlock.tasks.map((task) => {
+            return <HalfHourBlock task={task} />;
+          })}
         </VStack>
       </HStack>
     </Box>
