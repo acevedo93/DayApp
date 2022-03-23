@@ -16,8 +16,8 @@ export const Home = () => {
     <Container>
       <NewDayButton />
       <Box>
+        <TodayDate />
         <Stack spacing="6">
-          <TodayDate />
           {tasks.map((scheduleBlock) => {
             return <HourBlock scheduleBlock={scheduleBlock} />;
           })}
