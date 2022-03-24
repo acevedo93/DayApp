@@ -1,3 +1,3 @@
-export const daySelector = (state: { day: any }) => {
-  state.day;
-};
+import { RootState } from '..';
+
+export const daySelector = (state: RootState) => state.day.data;

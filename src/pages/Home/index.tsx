@@ -1,20 +1,22 @@
-import { Container, Box, Stack } from '@chakra-ui/react';
+import { Container, Box, Stack, Button } from '@chakra-ui/react';
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { logOut } from '../../services/firebase/auth';
 import { getDay } from '../../services/firebase/days';
+import { daySelector } from '../../store/selectors/daySelector';
 import { HourBlock } from './components/HourBlock';
 import { NewDayButton } from './components/NewDayButton';
 import { TodayDate } from './components/TodayDate';
 
-import { tasks } from './data';
-
 export const Home = () => {
   const dispatch = useDispatch();
+
+  const day = useSelector(daySelector);
 
   useEffect(() => {
     dispatch(getDay());
   }, []);
+
   const handleLogout = () => {
     dispatch(logOut());
   };
@@ -24,10 +26,12 @@ export const Home = () => {
       <Box>
         <TodayDate />
         <Stack spacing="6">
-          {tasks.map((scheduleBlock) => {
+          {day.map((scheduleBlock) => {
             return <HourBlock scheduleBlock={scheduleBlock} />;
           })}
         </Stack>
+
+        <Button onClick={handleLogout}>salir</Button>
       </Box>
     </Container>
   );
