@@ -1,4 +1,4 @@
-import { configureStore, combineReducers } from '@reduxjs/toolkit';
+import { configureStore, combineReducers, AnyAction } from '@reduxjs/toolkit';
 
 import { authReducer } from './slices/authSlice';
 import { dayReducer } from './slices/daySlice';
@@ -20,10 +20,20 @@ const dayPesistConfig = {
   storage,
 };
 
-const rootReducer = combineReducers({
+const appReducer = combineReducers({
   auth: persistReducer(authPersistConfig, authReducer),
   day: persistReducer(dayPesistConfig, dayReducer),
 });
+
+const rootReducer = (state: any, action: AnyAction) => {
+  if (action.type === 'signOut/fulfilled') {
+    storage.removeItem('persist:day');
+    state = {} as RootState;
+    return appReducer(state, action);
+  }
+
+  return appReducer(state, action);
+};
 
 export const store = configureStore({
   reducer: rootReducer,

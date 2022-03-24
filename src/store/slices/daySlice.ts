@@ -30,7 +30,7 @@ export const daySlice = createSlice({
     });
 
     builder.addCase(getDay.rejected, (state, action) => {
-      state.error = action.payload as string;
+      state.error = action.payload as any;
       state.loading = false;
     });
   },
