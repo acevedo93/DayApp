@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>581406484901-rtm0gbe8kej7lmm2c05a496dv9jefomm.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.581406484901-rtm0gbe8kej7lmm2c05a496dv9jefomm</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBm_VF3u74CWt-p_G_pqRwp9zn2cZfXBpE</string>
+	<key>GCM_SENDER_ID</key>
+	<string>581406484901</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.dav.dayapp</string>
+	<key>PROJECT_ID</key>
+	<string>dayapp-41e5b</string>
+	<key>STORAGE_BUCKET</key>
+	<string>dayapp-41e5b.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:581406484901:ios:29d87af6e715336514a04c</string>
+</dict>
+</plist>

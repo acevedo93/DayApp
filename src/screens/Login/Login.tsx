@@ -9,10 +9,10 @@ export const LoginScreen = () => {
   return (
     <Box background="info.10" flex="1" safeArea alignItems="center">
       <Box mt="50%" width="80%" rounded="lg" height="50%" background="info.25">
-        <VStack alignItems="center" space="10">
+        <VStack alignItems="center" space="10" padding="2">
           <Heading color="info.200">Login</Heading>
           <Button onPress={handleLogin} bg="primary.100" color="info.200">
-            start session
+            Login with google
           </Button>
         </VStack>
       </Box>
