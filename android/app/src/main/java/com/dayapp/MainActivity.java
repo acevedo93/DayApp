@@ -1,4 +1,4 @@
-package com.dayapp;
+package com.dav.dayapp;
 
 import android.os.Bundle;
 

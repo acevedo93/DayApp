@@ -1,4 +1,4 @@
-package com.dayapp.newarchitecture;
+package com.dav.dayapp.newarchitecture;
 
 import android.app.Application;
 import androidx.annotation.NonNull;
@@ -19,9 +19,9 @@ import com.facebook.react.fabric.CoreComponentsRegistry;
 import com.facebook.react.fabric.EmptyReactNativeConfig;
 import com.facebook.react.fabric.FabricJSIModuleProvider;
 import com.facebook.react.uimanager.ViewManagerRegistry;
-import com.dayapp.BuildConfig;
-import com.dayapp.newarchitecture.components.MainComponentsRegistry;
-import com.dayapp.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
+import com.dav.dayapp.BuildConfig;
+import com.dav.dayapp.newarchitecture.components.MainComponentsRegistry;
+import com.dav.dayapp.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
 import java.util.ArrayList;
 import java.util.List;
 

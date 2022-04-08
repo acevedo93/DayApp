@@ -12,7 +12,7 @@ export const LoginScreen = () => {
         <VStack alignItems="center" space="10">
           <Heading color="info.200">Login</Heading>
           <Button onPress={handleLogin} bg="primary.100" color="info.200">
-            Iniciar session
+            start session
           </Button>
         </VStack>
       </Box>

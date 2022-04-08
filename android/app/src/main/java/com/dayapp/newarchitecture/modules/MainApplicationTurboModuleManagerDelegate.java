@@ -1,4 +1,4 @@
-package com.dayapp.newarchitecture.modules;
+package com.dav.dayapp.newarchitecture.modules;
 
 import com.facebook.jni.HybridData;
 import com.facebook.react.ReactPackage;
