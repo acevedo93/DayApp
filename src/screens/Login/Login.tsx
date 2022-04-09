@@ -1,16 +1,10 @@
 import React from 'react';
 import {Box, Heading, Button, VStack} from 'native-base';
 
-import {login, logout} from '../../services/firebase/auth';
-
 export const LoginScreen = () => {
-  const handleLogin = () => {
-    login();
-  };
+  const handleLogin = () => {};
 
-  const handleLogout = () => {
-    logout();
-  };
+  const handleLogout = () => {};
 
   return (
     <Box background="info.10" flex="1" safeArea alignItems="center">

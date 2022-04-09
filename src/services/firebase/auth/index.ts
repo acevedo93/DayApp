@@ -7,11 +7,9 @@ GoogleSignin.configure({
   offlineAccess: true,
 });
 
-export const login = async () => {
+export const loginFirebase = async () => {
   const {idToken} = await GoogleSignin.signIn();
-  console.log(idToken);
   const googleCredential = auth.GoogleAuthProvider.credential(idToken);
-  console.log(googleCredential);
   return auth().signInWithCredential(googleCredential);
 };
 
