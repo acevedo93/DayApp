@@ -6,7 +6,7 @@ import {Stack} from '../constants';
 
 import {LoginScreen} from '../../../screens/Login/Login';
 
-export const AuthNavigation = () => {
+export const PublicNavigation = () => {
   return (
     <Stack.Navigator
       screenOptions={{
