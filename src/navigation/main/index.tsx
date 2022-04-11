@@ -1,14 +1,17 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
-import {AuthNavigation} from './auth';
-import {PublicNavigation} from './auth/index.tsx';
-import {PrivateNavigation} from './authorized/index.tsx';
+
+// routes
+import {PublicNavigation} from './auth/';
+import {PrivateNavigation} from './authorized';
+import {useAuth} from '../../hooks/useAuth';
+
 export const MainNavigation = () => {
-  const auth = true;
+  const isAuth = useAuth();
+
   return (
     <NavigationContainer>
-      {auth && <PrivateNavigation />}
-      {!auth && <PublicNavigation />}
+      {!isAuth ? <PublicNavigation /> : <PrivateNavigation />}
     </NavigationContainer>
   );
 };

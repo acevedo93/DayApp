@@ -10,17 +10,17 @@ export const login = createAsyncThunk('auth/login', async (_, thunkApi) => {
 });
 
 interface InitialState {
-  user: '';
+  user: string;
+  errorMessage: string;
   isLogin: boolean;
   isLoading: boolean;
-  errorMessage: '';
 }
 
 const initialState: InitialState = {
   user: '',
+  errorMessage: '',
   isLogin: false,
   isLoading: false,
-  errorMessage: '',
 };
 
 export const authSlice = createSlice({
@@ -34,14 +34,14 @@ export const authSlice = createSlice({
     builder.addCase(login.pending, (state, action) => {
       state.isLoading = true;
       state.isLogin = false;
-      state.err = '';
+      state.errorMessage = '';
       state.user = '';
     });
     builder.addCase(login.rejected, (state, action) => {
+      state.errorMessage = '';
+      state.user = '';
       state.isLoading = false;
       state.isLogin = false;
-      state.errorMessage = 'err';
-      state.user = '';
     });
   },
 });

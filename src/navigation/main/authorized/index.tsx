@@ -3,7 +3,6 @@ import React from 'react';
 import {Stack} from '../constants';
 
 //screens
-
 import {HomeScreen} from '../../../screens/Home';
 
 export const PrivateNavigation = () => {
