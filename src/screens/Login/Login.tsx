@@ -1,10 +1,12 @@
 import React from 'react';
 import {Box, Heading, Button, VStack} from 'native-base';
+import {login} from '../../redux/slices/auth.slice';
+import {loginFirebase} from '../../services/firebase/auth';
 
 export const LoginScreen = () => {
-  const handleLogin = () => {};
-
-  const handleLogout = () => {};
+  const handleLogin = () => {
+    loginFirebase();
+  };
 
   return (
     <Box background="info.10" flex="1" safeArea alignItems="center">
@@ -13,9 +15,6 @@ export const LoginScreen = () => {
           <Heading color="info.200">Login</Heading>
           <Button onPress={handleLogin} bg="primary.100" color="info.200">
             Login with google
-          </Button>
-          <Button bg="primary.100" color="info.200" onPress={handleLogout}>
-            Logout
           </Button>
         </VStack>
       </Box>

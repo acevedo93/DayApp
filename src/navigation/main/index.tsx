@@ -7,11 +7,15 @@ import {PrivateNavigation} from './authorized';
 import {useAuth} from '../../hooks/useAuth';
 
 export const MainNavigation = () => {
-  const isAuth = useAuth();
+  const {user, initializing} = useAuth();
+
+  if (initializing) {
+    return null;
+  }
 
   return (
     <NavigationContainer>
-      {!isAuth ? <PublicNavigation /> : <PrivateNavigation />}
+      {!user ? <PublicNavigation /> : <PrivateNavigation />}
     </NavigationContainer>
   );
 };
