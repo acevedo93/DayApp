@@ -13,14 +13,14 @@ export const loginFirebase = async () => {
     const googleCredential = auth.GoogleAuthProvider.credential(idToken);
     return auth().signInWithCredential(googleCredential);
   } catch (err) {
-    console.log(err);
+    return err;
   }
 };
 
-export const logout = async () => {
+export const logoutFirebase = async () => {
   try {
     return await auth().signOut();
   } catch (err) {
-    console.log(err);
+    return err;
   }
 };

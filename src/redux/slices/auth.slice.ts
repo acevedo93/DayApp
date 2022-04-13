@@ -1,9 +1,17 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
-import {loginFirebase} from '../../services/firebase/auth';
+import {loginFirebase, logoutFirebase} from '../../services/firebase/auth';
 
-export const login = createAsyncThunk('auth/login', async (_, thunkApi) => {
+export const login = createAsyncThunk('user/login', async (_, thunkApi) => {
   try {
     return loginFirebase();
+  } catch (err) {
+    return thunkApi.rejectWithValue({err});
+  }
+});
+
+export const logout = createAsyncThunk('user/logout', async (_, thunkApi) => {
+  try {
+    return await logoutFirebase();
   } catch (err) {
     return thunkApi.rejectWithValue({err});
   }
@@ -23,8 +31,8 @@ const initialState: InitialState = {
   isLoading: false,
 };
 
-export const authSlice = createSlice({
-  name: 'auth',
+export const userSlice = createSlice({
+  name: 'user',
   initialState,
   reducers: {},
   extraReducers: builder => {
@@ -43,9 +51,15 @@ export const authSlice = createSlice({
       state.isLoading = false;
       state.isLogin = false;
     });
+
+    builder.addCase(logout.pending, (state, action) => {
+      state.isLoading = true;
+    }),
+      builder.addCase(logout.fulfilled, (state, action) => {
+        state.user = '';
+        state.isLoading = false;
+      });
   },
 });
 
-const authReducer = authSlice.reducer;
-
-export {authReducer};
+export const userReducer = userSlice.reducer;
