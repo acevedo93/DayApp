@@ -1,12 +1,15 @@
 import React, {useState} from 'react';
 import {Box, Heading, Button, VStack, Text, Checkbox} from 'native-base';
 import {loginFirebase} from '../../services/firebase/auth';
+import {useDispatch} from 'react-redux';
+import {login} from '../../redux/slices/auth.slice';
 
 export const LoginScreen = () => {
+  const dispatch = useDispatch();
   const [terms, setTerms] = useState(false);
 
   const handleLogin = () => {
-    loginFirebase();
+    dispatch(login());
   };
 
   return (
