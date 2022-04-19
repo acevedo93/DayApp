@@ -1,11 +1,11 @@
 import {configureStore} from '@reduxjs/toolkit';
 import {userReducer} from '../redux/slices/auth.slice';
-
-import devToolsEnhancer from 'remote-redux-devtools';
+import {dayReducer} from './slices/day.slice';
 
 export const store = configureStore({
   reducer: {
     auth: userReducer,
+    day: dayReducer,
   },
 });
 
