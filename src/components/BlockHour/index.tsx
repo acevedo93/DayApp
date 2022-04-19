@@ -5,6 +5,7 @@ import {Task} from '../Task';
 interface Props {
   data: any;
 }
+
 export const BlockHour = ({data}: Props) => {
   return (
     <HStack>
