@@ -7,6 +7,7 @@ interface Props {
 }
 
 export const Task = () => {
+  console.log('ENTRO ACA');
   return (
     <Box
       borderWidth="2"
@@ -16,7 +17,7 @@ export const Task = () => {
       alignItems="center"
       borderRadius="5"
       flexDir="row">
-      <Text>React js- Planear Day app</Text>
+      <Text testID="task-title">React js- Planear Day app</Text>
       <Spacer />
       <Text>23:21</Text>
     </Box>
