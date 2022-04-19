@@ -9,6 +9,8 @@ import {useAuth} from '../../hooks/useAuth';
 export const MainNavigation = () => {
   const {user, initializing} = useAuth();
 
+  console.log('USER', user);
+
   if (initializing) {
     return null;
   }

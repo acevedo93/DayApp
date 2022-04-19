@@ -6,7 +6,7 @@ interface Props {
   task: any;
 }
 
-export const Task = () => {
+export const Task = ({task}: Props) => {
   return (
     <Box
       borderWidth="2"
@@ -16,7 +16,9 @@ export const Task = () => {
       alignItems="center"
       borderRadius="5"
       flexDir="row">
-      <Text>React js- Planear Day app</Text>
+      <Text>{task.title}</Text>
+      <Text>{task.description}</Text>
+
       <Spacer />
       <Text>23:21</Text>
     </Box>
