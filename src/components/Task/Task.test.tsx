@@ -1,17 +1,20 @@
 import React from 'react';
-import {render} from '@testing-library/react-native';
+import {render, RenderAPI} from '@testing-library/react-native';
 import {Task} from './';
 import {NativeBaseProvider} from 'native-base';
-describe('<Task />', () => {
-  const {getByTestId} = render(
-    <NativeBaseProvider>
-      <Task />
-    </NativeBaseProvider>,
-  );
 
-  test('Should be render task title', () => {
-    const text = getByTestId('task-title');
-    console.log(text);
+let component: RenderAPI;
+describe('<Task />', () => {
+  beforeEach(() => {
+    component = render(
+      <NativeBaseProvider>
+        <Task />
+      </NativeBaseProvider>,
+    );
+  });
+
+  it('Should be render task title', () => {
+    const text = component.queryByTestId('task-title');
     expect(text).toBeDefined();
   });
 });

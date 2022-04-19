@@ -7,6 +7,7 @@ interface Props {
 }
 
 export const Task = () => {
+  console.log('ENTRO ACA');
   return (
     <Box
       borderWidth="2"
