@@ -2,7 +2,6 @@ import {getDay} from '../../services/firebase/day';
 import {createSlice} from '@reduxjs/toolkit';
 import {AppState} from 'react-native';
 import {RootState} from '../store';
-
 interface InitialState {
   isLoading: boolean;
   data: any[];

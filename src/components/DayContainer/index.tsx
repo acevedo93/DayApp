@@ -5,30 +5,30 @@ import {useDispatch, useSelector} from 'react-redux';
 import {getDay} from '../../services/firebase/day';
 import {daySelector} from '../../redux/slices/day.slice';
 
-const DATA_TEST = [
-  {
-    date: '3/25/2022',
-    hour: '6:00 am',
-    state: 'progress',
-    tasks: [
-      {
-        block: '1',
-        description: ' Terminar React js',
-        state: 'success',
-        title: 'react',
-        type: 'work',
-      },
+//const DATA_TEST = [
+//{
+//date: '3/25/2022',
+//hour: '6:00 am',
+//state: 'progress',
+//tasks: [
+//{
+//block: '1',
+//description: ' Terminar React js',
+//state: 'success',
+//title: 'react',
+//type: 'work',
+//},
 
-      {
-        block: '2',
-        description: 'Estudiar angular ',
-        state: 'pending',
-        title: 'angular',
-        type: 'work',
-      },
-    ],
-  },
-];
+//{
+//block: '2',
+//description: 'Estudiar angular ',
+//state: 'pending',
+//title: 'angular',
+//type: 'work',
+//},
+//],
+//},
+//];
 
 export const DayContainer = () => {
   const dispatch = useDispatch();

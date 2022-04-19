@@ -13,6 +13,7 @@ export const getDay = createAsyncThunk('day/getDay', async (_, thunkAPi) => {
       .get();
 
     const day: any = [];
+
     dayData.forEach(QS => {
       day.push(QS.data());
     });
