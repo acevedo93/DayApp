@@ -10,6 +10,7 @@ export const getDay = createAsyncThunk('day/getDay', async (_, thunkAPi) => {
     const dayData = await userRef
       .collection('Days')
       .where('date', '==', '3/25/2022')
+      .orderBy('hour')
       .get();
 
     const day: any = [];
@@ -19,7 +20,7 @@ export const getDay = createAsyncThunk('day/getDay', async (_, thunkAPi) => {
     });
 
     return {
-      date: 'wed 23 ',
+      date: 'wed 23/2020 ',
       data: day,
     };
   } catch (err) {
