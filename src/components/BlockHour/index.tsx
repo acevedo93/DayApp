@@ -3,18 +3,17 @@ import {HStack, Text, VStack} from 'native-base';
 import {Task} from '../Task';
 
 interface Props {
-  hour: string;
-  tasks: any[];
+  data: any;
 }
-export const BlockHour = ({hour}: Props) => {
+export const BlockHour = ({data}: Props) => {
   return (
     <HStack>
       <Text flex="1" fontSize="lg" fontWeight="bold">
-        {hour} am
+        {data.hour}
       </Text>
       <VStack flex="3" space="2">
-        <Task />
-        <Task />
+        <Task task={data.tasks[0]} />
+        <Task task={data.tasks[1]} />
       </VStack>
     </HStack>
   );

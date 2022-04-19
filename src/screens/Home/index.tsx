@@ -1,22 +1,8 @@
 import React from 'react';
-import {
-  Box,
-  VStack,
-  Heading,
-  Center,
-  Checkbox,
-  Button,
-  Pressable,
-  HStack,
-  Text,
-} from 'native-base';
+import {Box, Heading, Center, Pressable} from 'native-base';
 import {DayContainer} from '../../components/DayContainer';
-import {useDispatch} from 'react-redux';
-import {logout} from '../../redux/slices/auth.slice';
 
 export const HomeScreen = () => {
-  const dispatch = useDispatch();
-
   return (
     <Box background="info.10" flex="1" px="4">
       <Pressable onPress={() => console.log('pressable')}>
