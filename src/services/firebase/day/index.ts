@@ -1,5 +1,6 @@
 import firestore from '@react-native-firebase/firestore';
 import {createAsyncThunk} from '@reduxjs/toolkit';
+import dayjs from 'dayjs';
 
 export const getDay = createAsyncThunk('day/getDay', async (_, thunkAPi) => {
   try {
@@ -14,13 +15,14 @@ export const getDay = createAsyncThunk('day/getDay', async (_, thunkAPi) => {
       .get();
 
     const day: any = [];
+    const currentDateFormat = dayjs().format('dddd, DD/MMM');
 
     dayData.forEach(QS => {
       day.push(QS.data());
     });
 
     return {
-      date: 'wed 23/2020 ',
+      date: currentDateFormat,
       data: day,
     };
   } catch (err) {
