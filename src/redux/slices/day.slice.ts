@@ -1,10 +1,12 @@
 import {getDay} from '../../services/firebase/day';
 import {createSlice} from '@reduxjs/toolkit';
-import {AppState} from 'react-native';
 import {RootState} from '../store';
+import {DayData} from '../../models';
+import {dayAdapter} from '../../adapters/day.adapter';
+
 interface InitialState {
   isLoading: boolean;
-  data: any[];
+  data: DayData[] | [];
   errorMessage: string;
   currentDate: string;
 }
@@ -20,20 +22,21 @@ export const daySlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: builder => {
-    builder.addCase(getDay.pending, (state, action) => {
+    builder.addCase(getDay.pending, (state, action: any) => {
+      state.errorMessage = '';
       state.isLoading = true;
-      (state.errorMessage = ''), (state.data = []);
+      state.data = [];
     }),
-      builder.addCase(getDay.fulfilled, (state, action: {payload: any}) => {
-        console.log('payl9oad', action.payload);
-        state.data = action.payload.data;
+      builder.addCase(getDay.fulfilled, (state, action) => {
+        const {data, date} = dayAdapter(action.payload!);
+        state.data = data;
+        state.currentDate = date;
         state.isLoading = false;
-        state.currentDate = action.payload?.date;
-      }),
-      builder.addCase(getDay.rejected, (state, action) => {
-        state.errorMessage = action.payload as string;
-        (state.data = []), (state.isLoading = false);
       });
+    builder.addCase(getDay.rejected, (state, action) => {
+      state.errorMessage = action.payload as string;
+      (state.data = []), (state.isLoading = false);
+    });
   },
 });
 
