@@ -1,10 +1,12 @@
 import React, {useEffect} from 'react';
-import {VStack, Text, Spinner} from 'native-base';
+import {VStack, Text, FlatList} from 'native-base';
 import {BlockHour} from '../BlockHour';
 import {useDispatch, useSelector} from 'react-redux';
 import {getDay} from '../../services/firebase/day';
 import {daySelector} from '../../redux/slices/day.slice';
 import {CustomSpinner} from '../Spinner';
+import {DayData} from '../../models';
+import {FadeInContainer} from '../FadeInContainer';
 
 export const DayContainer = () => {
   const dispatch = useDispatch();
@@ -13,6 +15,10 @@ export const DayContainer = () => {
   useEffect(() => {
     dispatch(getDay());
   }, []);
+
+  const renderBlockhour = (itemList: {item: DayData}) => (
+    <BlockHour data={itemList.item} />
+  );
 
   if (day.isLoading) {
     return <CustomSpinner />;
@@ -24,9 +30,9 @@ export const DayContainer = () => {
           <Text mt="8" fontSize="2xl">
             {day.currentDate}
           </Text>
-          {day.data.map(blockHour => {
-            return <BlockHour data={blockHour} />;
-          })}
+          <FadeInContainer>
+            <FlatList data={day.data} renderItem={renderBlockhour} />
+          </FadeInContainer>
         </>
       )}
     </VStack>

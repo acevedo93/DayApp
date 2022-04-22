@@ -18,6 +18,7 @@ export const HomeScreen = () => {
           borderStyle="dashed">
           <Heading color="info.200">Planear Nuevo dia</Heading>
         </Center>
+
         <DayContainer />
       </Pressable>
     </Box>

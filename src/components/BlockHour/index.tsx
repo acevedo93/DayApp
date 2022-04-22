@@ -1,14 +1,15 @@
 import React from 'react';
 import {HStack, Text, VStack} from 'native-base';
 import {Task} from '../Task';
+import {DayData} from '../../models/index';
 
 interface Props {
-  data: any;
+  data: DayData;
 }
 
 export const BlockHour = ({data}: Props) => {
   return (
-    <HStack>
+    <HStack marginBottom="4">
       <Text flex="1" fontSize="lg" fontWeight="bold">
         {data.hour}
       </Text>

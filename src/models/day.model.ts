@@ -7,6 +7,7 @@ export interface DayData {
   date: string;
   hour: string;
   state: HourState;
+  tasks: Task[];
 }
 
 export interface Day {
