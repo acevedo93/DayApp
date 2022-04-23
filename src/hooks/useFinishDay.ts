@@ -12,15 +12,11 @@ export const useFinishDay = () => {
   useEffect(() => {
     calculateTimeRemaining();
   }, []);
+
   const calculateTimeRemaining = () => {
     const tomorrow = dayjs().add(1, 'day').set('h', 0).set('m', 0).set('s', 0);
-
     const timeRemaining = dayjs().diff(tomorrow, 'h');
-
-    if (Math.abs(timeRemaining) <= HOURS_TO_CLOSEDAY) {
-      return setCloseDay(true);
-    }
-    return setCloseDay(false);
+    return setCloseDay(Math.abs(timeRemaining) <= HOURS_TO_CLOSEDAY);
   };
 
   return {

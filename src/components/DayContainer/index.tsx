@@ -1,40 +1,50 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {VStack, Text, FlatList} from 'native-base';
 import {BlockHour} from '../BlockHour';
 import {useDispatch, useSelector} from 'react-redux';
 import {getDay} from '../../services/firebase/day';
 import {daySelector} from '../../redux/slices/day.slice';
 import {CustomSpinner} from '../Spinner';
-import {DayData} from '../../models';
+import {DayData, generateSkeletonForNewDay} from '../../models';
 import {FadeInContainer} from '../FadeInContainer';
 
 export const DayContainer = () => {
   const dispatch = useDispatch();
-  const day = useSelector(daySelector);
+  const {isCreationMode, isLoading, data, currentDate} =
+    useSelector(daySelector);
+  const [daySkeleton, setSkeletonDay] = useState<DayData[]>([]);
 
   useEffect(() => {
-    dispatch(getDay());
+    checkCreationMode();
   }, []);
 
   const renderBlockhour = (itemList: {item: DayData}) => (
-    <BlockHour data={itemList.item} />
+    <BlockHour isCreationMode={isCreationMode} data={itemList.item} />
   );
 
-  if (day.isLoading) {
+  const checkCreationMode = () => {
+    return isCreationMode
+      ? setSkeletonDay(generateSkeletonForNewDay())
+      : dispatch(getDay());
+  };
+
+  if (isLoading) {
     return <CustomSpinner />;
   }
+
   return (
     <VStack space="4">
-      {!day.isLoading && day.data && (
-        <>
-          <Text mt="8" fontSize="2xl">
-            {day.currentDate}
-          </Text>
-          <FadeInContainer>
-            <FlatList data={day.data} renderItem={renderBlockhour} />
-          </FadeInContainer>
-        </>
-      )}
+      <>
+        <Text mt="8" fontSize="2xl">
+          {currentDate}
+        </Text>
+        <FadeInContainer>
+          <FlatList
+            data={isCreationMode ? daySkeleton : data}
+            renderItem={renderBlockhour}
+          />
+        </FadeInContainer>
+      </>
     </VStack>
   );
 };

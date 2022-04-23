@@ -25,3 +25,27 @@ export interface Task {
 export type QuerySnapshotDay = FirebaseFirestoreTypes.QuerySnapshot<DayData>;
 
 export type GetDayResponseService = QuerySnapshotDay | undefined;
+
+//initial config for new Day
+
+export const generateSkeletonForNewDay = (): DayData[] => {
+  const startAt = 5;
+  const endsAt = 22;
+
+  const hourSkeleton: DayData = {
+    date: '23-4-3',
+    hour: `${startAt}:00`,
+    state: 'pending',
+    tasks: [],
+  };
+  const blockDay: DayData[] = [];
+
+  for (let i = startAt; i <= endsAt; i++) {
+    blockDay.push({
+      ...hourSkeleton,
+      hour: `${i}:00`,
+    });
+  }
+
+  return blockDay;
+};

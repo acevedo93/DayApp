@@ -9,20 +9,30 @@ interface InitialState {
   data: DayData[] | [];
   errorMessage: string;
   currentDate: string;
+  isCreationMode: boolean;
 }
+
 const initialState: InitialState = {
   isLoading: false,
   data: [],
   errorMessage: '',
   currentDate: '3/22/2022',
+  isCreationMode: false,
 };
 
 export const daySlice = createSlice({
   name: 'day',
   initialState,
-  reducers: {},
+  reducers: {
+    setCreationMode(state) {
+      state.isCreationMode = true;
+    },
+    disableCreationMode(state) {
+      state.isCreationMode = false;
+    },
+  },
   extraReducers: builder => {
-    builder.addCase(getDay.pending, (state, action: any) => {
+    builder.addCase(getDay.pending, state => {
       state.errorMessage = '';
       state.isLoading = true;
       state.data = [];
@@ -32,6 +42,7 @@ export const daySlice = createSlice({
         state.data = data;
         state.currentDate = date;
         state.isLoading = false;
+        state.isCreationMode = false;
       });
     builder.addCase(getDay.rejected, (state, action) => {
       state.errorMessage = action.payload as string;
@@ -41,6 +52,7 @@ export const daySlice = createSlice({
 });
 
 export const dayReducer = daySlice.reducer;
+export const {setCreationMode, disableCreationMode} = daySlice.actions;
 
 export const daySelector = (state: RootState) => {
   return state.day;

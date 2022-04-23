@@ -5,6 +5,7 @@ import {colors} from '../../../styles/theme/colors';
 
 //screens
 import {HomeScreen} from '../../../screens/Home';
+import {NewDayScreen} from '../../../screens/NewDay';
 
 export const PrivateNavigation = () => {
   return (
@@ -16,9 +17,15 @@ export const PrivateNavigation = () => {
         headerTintColor: 'white',
       }}>
       <Stack.Screen
-        options={{title: 'New Day'}}
+        options={{title: 'Today task'}}
         name="Home"
         component={HomeScreen}
+      />
+
+      <Stack.Screen
+        options={{title: 'New Day'}}
+        name="newDay"
+        component={NewDayScreen}
       />
     </Stack.Navigator>
   );
