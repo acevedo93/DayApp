@@ -7,6 +7,7 @@ import {daySelector} from '../../redux/slices/day.slice';
 import {CustomSpinner} from '../Spinner';
 import {DayData, generateSkeletonForNewDay} from '../../models';
 import {FadeInContainer} from '../FadeInContainer';
+import {SetEditBlockHour} from '../Modals/SetEditBlockHour';
 
 interface Props {
   isCreationMode?: boolean;
@@ -16,13 +17,25 @@ export const DayContainer = ({isCreationMode = false}: Props) => {
   const dispatch = useDispatch();
   const {isLoading, data, currentDate} = useSelector(daySelector);
   const [daySkeleton, setSkeletonDay] = useState<DayData[]>([]);
+  const [showModal, setShowModal] = useState<boolean>(false);
 
   useEffect(() => {
     checkCreationMode();
   }, []);
 
+  const handleOpenModal = () => {
+    if (!isCreationMode) {
+      return null;
+    }
+    setShowModal(!showModal);
+  };
+
   const renderBlockhour = (itemList: {item: DayData}) => (
-    <BlockHour isCreationMode={isCreationMode} data={itemList.item} />
+    <BlockHour
+      onPress={handleOpenModal}
+      isCreationMode={isCreationMode}
+      data={itemList.item}
+    />
   );
 
   const checkCreationMode = () => {
@@ -48,6 +61,13 @@ export const DayContainer = ({isCreationMode = false}: Props) => {
           />
         </FadeInContainer>
       </>
+
+      {isCreationMode && (
+        <SetEditBlockHour
+          showModal={showModal}
+          setShowModal={close => setShowModal(close)}
+        />
+      )}
     </VStack>
   );
 };

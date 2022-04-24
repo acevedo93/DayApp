@@ -6,11 +6,12 @@ import {DayData} from '../../models/index';
 interface Props {
   data: DayData;
   isCreationMode: boolean;
+  onPress: (data: DayData) => void;
 }
 
-export const BlockHour = ({data, isCreationMode}: Props) => {
+export const BlockHour = ({data, isCreationMode, onPress}: Props) => {
   return (
-    <Pressable onPress={() => console.log('hola')}>
+    <Pressable onPress={() => onPress(data)}>
       <HStack marginBottom="4">
         <Text flex="1" fontSize="lg" fontWeight="bold">
           {data.hour}
