@@ -2,14 +2,21 @@ import React from 'react';
 import {Box, Heading, Center, Pressable} from 'native-base';
 import {DayContainer} from '../../components/DayContainer';
 import {useFinishDay} from '../../hooks/useFinishDay';
-import {useNavigation} from '@react-navigation/native';
+import {useFocusEffect, useNavigation} from '@react-navigation/native';
 import {useDispatch} from 'react-redux';
-import {setCreationMode} from '../../redux/slices/day.slice';
+import {
+  disableCreationMode,
+  setCreationMode,
+} from '../../redux/slices/day.slice';
 
 export const HomeScreen = () => {
   const {isTimeToCloseDay} = useFinishDay();
   const navigation = useNavigation();
   const dispatch = useDispatch();
+
+  useFocusEffect(() => {
+    dispatch(disableCreationMode());
+  });
 
   const goToNweDay = () => {
     dispatch(setCreationMode());
@@ -35,7 +42,7 @@ export const HomeScreen = () => {
         </Pressable>
       )}
 
-      <DayContainer />
+      <DayContainer isCreationMode={false} />
     </Box>
   );
 };

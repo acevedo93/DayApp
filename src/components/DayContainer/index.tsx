@@ -8,10 +8,13 @@ import {CustomSpinner} from '../Spinner';
 import {DayData, generateSkeletonForNewDay} from '../../models';
 import {FadeInContainer} from '../FadeInContainer';
 
-export const DayContainer = () => {
+interface Props {
+  isCreationMode?: boolean;
+}
+
+export const DayContainer = ({isCreationMode = false}: Props) => {
   const dispatch = useDispatch();
-  const {isCreationMode, isLoading, data, currentDate} =
-    useSelector(daySelector);
+  const {isLoading, data, currentDate} = useSelector(daySelector);
   const [daySkeleton, setSkeletonDay] = useState<DayData[]>([]);
 
   useEffect(() => {
