@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {VStack, Text, FlatList} from 'native-base';
+import {VStack, Text, FlatList, Button, Box} from 'native-base';
 import {BlockHour} from '../BlockHour';
 import {useDispatch, useSelector} from 'react-redux';
 import {getDay} from '../../services/firebase/day';
@@ -18,16 +18,27 @@ export const DayContainer = ({isCreationMode = false}: Props) => {
   const {isLoading, data, currentDate} = useSelector(daySelector);
   const [daySkeleton, setSkeletonDay] = useState<DayData[]>([]);
   const [showModal, setShowModal] = useState<boolean>(false);
+  const [blockHourInModal, setBlockHourInModal] = useState<DayData>({
+    hour: '',
+    date: '',
+    tasks: [],
+    state: 'pending',
+  });
 
   useEffect(() => {
     checkCreationMode();
   }, []);
 
-  const handleOpenModal = () => {
+  const handleOpenModal = (blockHour: DayData) => {
     if (!isCreationMode) {
       return null;
     }
     setShowModal(!showModal);
+    setBlockHourInModal(blockHour);
+  };
+  const setBlockHour = (blockHour: DayData) => {
+    //set new Data in block
+    console.log(blockHour);
   };
 
   const renderBlockhour = (itemList: {item: DayData}) => (
@@ -44,6 +55,10 @@ export const DayContainer = ({isCreationMode = false}: Props) => {
       : dispatch(getDay());
   };
 
+  const saveData = () => {
+    //dispatch new Day to server
+  };
+
   if (isLoading) {
     return <CustomSpinner />;
   }
@@ -51,9 +66,19 @@ export const DayContainer = ({isCreationMode = false}: Props) => {
   return (
     <VStack space="4">
       <>
-        <Text mt="8" fontSize="2xl">
-          {currentDate}
-        </Text>
+        <Box flexDir="row" alignItems="center" justifyContent="space-between">
+          <Text mt="8" fontSize="2xl">
+            {currentDate}
+          </Text>{' '}
+          {isCreationMode && (
+            <Button
+              mt="10"
+              backgroundColor={'secondary.200'}
+              onPress={saveData}>
+              Guardar
+            </Button>
+          )}
+        </Box>
         <FadeInContainer>
           <FlatList
             data={isCreationMode ? daySkeleton : data}
@@ -64,6 +89,8 @@ export const DayContainer = ({isCreationMode = false}: Props) => {
 
       {isCreationMode && (
         <SetEditBlockHour
+          sendData={setBlockHour}
+          data={blockHourInModal}
           showModal={showModal}
           setShowModal={close => setShowModal(close)}
         />
