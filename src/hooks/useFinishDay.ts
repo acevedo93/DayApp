@@ -4,7 +4,7 @@ import {useEffect, useState} from 'react';
 
 dayjs.extend(relativeTime);
 
-const HOURS_TO_CLOSEDAY = 0.5;
+const HOURS_TO_CLOSEDAY = 2;
 
 export const useFinishDay = () => {
   const [isTimeToCloseDay, setCloseDay] = useState<boolean>(false);
