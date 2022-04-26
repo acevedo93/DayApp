@@ -2,13 +2,12 @@ import React, {useEffect, useState} from 'react';
 import {VStack, Text, FlatList, Button, Box} from 'native-base';
 import {BlockHour} from '../BlockHour';
 import {useDispatch, useSelector} from 'react-redux';
-import {getDay} from '../../services/firebase/day';
+import {createDay, getDay} from '../../services/firebase/day';
 import {daySelector} from '../../redux/slices/day.slice';
 import {CustomSpinner} from '../Spinner';
 import {DayData, generateSkeletonForNewDay} from '../../models';
 import {FadeInContainer} from '../FadeInContainer';
 import {SetEditBlockHour} from '../Modals/SetEditBlockHour';
-import {find} from 'lodash';
 
 interface Props {
   isCreationMode?: boolean;
@@ -60,13 +59,12 @@ export const DayContainer = ({isCreationMode = false}: Props) => {
   };
 
   const saveData = () => {
-    //dispatch new Day to server
+    dispatch(createDay(daySkeleton));
   };
 
   if (isLoading) {
     return <CustomSpinner />;
   }
-  console.log(daySkeleton);
 
   return (
     <VStack space="4">
@@ -74,7 +72,7 @@ export const DayContainer = ({isCreationMode = false}: Props) => {
         <Box flexDir="row" alignItems="center" justifyContent="space-between">
           <Text mt="8" fontSize="2xl">
             {currentDate}
-          </Text>{' '}
+          </Text>
           {isCreationMode && (
             <Button
               mt="10"

@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {Modal, VStack, Button} from 'native-base';
 import {DayData} from '../../../models';
 import {CustomInput} from '../../CustomInput';
+import {taskFormatAdapter} from '../../../adapters';
 interface Props {
   showModal: boolean;
   setShowModal: (showModal: boolean) => void;
@@ -17,8 +18,6 @@ export const SetEditBlockHour = ({
   const [task1, setTask1] = useState('');
   const [task2, setTask2] = useState('');
 
-  console.log(task1, task2);
-
   useEffect(() => {
     if (data.tasks[0]?.description.length) {
       setTask1(data.tasks[0].description);
@@ -31,27 +30,10 @@ export const SetEditBlockHour = ({
 
   const handleData = () => {
     let dataWithNewBlock = {...data};
-
-    if (task1.length && task2.length) {
-      dataWithNewBlock = {
-        ...dataWithNewBlock,
-        tasks: [
-          {
-            title: '',
-            description: task1,
-            state: 'pending',
-            type: task1.length ? 'work' : 'rest',
-          },
-
-          {
-            title: '',
-            description: task2,
-            state: 'pending',
-            type: task2.length ? 'work' : 'rest',
-          },
-        ],
-      };
-    }
+    dataWithNewBlock = {
+      ...dataWithNewBlock,
+      tasks: taskFormatAdapter(task1, task2),
+    };
 
     sendData(dataWithNewBlock);
     setShowModal(false);

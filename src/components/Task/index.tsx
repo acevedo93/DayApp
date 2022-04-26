@@ -19,7 +19,7 @@ export const Task = ({task, isCreationMode}: Props) => {
       borderRadius="5"
       flexDir="row">
       <Text flex="2">{task.description}</Text>
-      <PomodoroClock />
+      {!isCreationMode && <PomodoroClock />}
     </Box>
   );
 };

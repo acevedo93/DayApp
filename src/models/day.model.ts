@@ -33,22 +33,22 @@ export const generateSkeletonForNewDay = (): DayData[] => {
   const endsAt = 22;
 
   const hourSkeleton: DayData = {
-    date: '23-4-3',
+    date: '23/4/3',
     hour: `${startAt}:00`,
     state: 'pending',
     tasks: [
       {
         title: '',
         description: '',
-        state: 'pending',
-        type: 'work',
+        state: 'success',
+        type: 'rest',
       },
 
       {
         title: '',
         description: '',
-        state: 'pending',
-        type: 'work',
+        state: 'success',
+        type: 'rest',
       },
     ],
   };

@@ -1,4 +1,4 @@
-import {getDay} from '../../services/firebase/day';
+import {createDay, getDay} from '../../services/firebase/day';
 import {createSlice} from '@reduxjs/toolkit';
 import {RootState} from '../store';
 import {DayData} from '../../models';
@@ -47,6 +47,21 @@ export const daySlice = createSlice({
     builder.addCase(getDay.rejected, (state, action) => {
       state.errorMessage = action.payload as string;
       (state.data = []), (state.isLoading = false);
+    });
+
+    builder.addCase(createDay.pending, (state, action) => {
+      state.isLoading = true;
+      state.errorMessage = '';
+    });
+
+    builder.addCase(createDay.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.isCreationMode = false;
+    });
+
+    builder.addCase(createDay.rejected, (state, action) => {
+      state.isLoading = false;
+      state.errorMessage = action.payload as string;
     });
   },
 });
