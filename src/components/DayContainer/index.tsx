@@ -8,6 +8,7 @@ import {CustomSpinner} from '../Spinner';
 import {DayData, generateSkeletonForNewDay} from '../../models';
 import {FadeInContainer} from '../FadeInContainer';
 import {SetEditBlockHour} from '../Modals/SetEditBlockHour';
+import {find} from 'lodash';
 
 interface Props {
   isCreationMode?: boolean;
@@ -37,8 +38,11 @@ export const DayContainer = ({isCreationMode = false}: Props) => {
     setBlockHourInModal(blockHour);
   };
   const setBlockHour = (blockHour: DayData) => {
-    //set new Data in block
-    console.log(blockHour);
+    let skeletonDayCopy = [...daySkeleton];
+    const skeletonDayWithNewBlockHour = skeletonDayCopy.map(elem =>
+      elem.hour === blockHour.hour ? blockHour : elem,
+    );
+    setSkeletonDay(skeletonDayWithNewBlockHour);
   };
 
   const renderBlockhour = (itemList: {item: DayData}) => (
@@ -62,6 +66,7 @@ export const DayContainer = ({isCreationMode = false}: Props) => {
   if (isLoading) {
     return <CustomSpinner />;
   }
+  console.log(daySkeleton);
 
   return (
     <VStack space="4">

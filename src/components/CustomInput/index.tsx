@@ -10,7 +10,9 @@ interface Props {
 export const CustomInput = ({value, onChange}: Props) => {
   return (
     <Input
-      onChange={onChange}
+      selectionColor="primary.200"
+      selection
+      onChangeText={onChange}
       value={value}
       width="100%"
       rounded="lg"

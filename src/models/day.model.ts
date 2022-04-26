@@ -36,7 +36,21 @@ export const generateSkeletonForNewDay = (): DayData[] => {
     date: '23-4-3',
     hour: `${startAt}:00`,
     state: 'pending',
-    tasks: [],
+    tasks: [
+      {
+        title: '',
+        description: '',
+        state: 'pending',
+        type: 'work',
+      },
+
+      {
+        title: '',
+        description: '',
+        state: 'pending',
+        type: 'work',
+      },
+    ],
   };
   const blockDay: DayData[] = [];
 

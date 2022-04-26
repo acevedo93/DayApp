@@ -20,26 +20,52 @@ export const SetEditBlockHour = ({
   console.log(task1, task2);
 
   useEffect(() => {
-    if (data.tasks[0].description.length) {
+    if (data.tasks[0]?.description.length) {
       setTask1(data.tasks[0].description);
     }
 
-    if (data.tasks[1].description.length) {
+    if (data.tasks[1]?.description.length) {
       setTask1(data.tasks[1].description);
     }
   }, []);
 
+  const handleData = () => {
+    let dataWithNewBlock = {...data};
+
+    if (task1.length && task2.length) {
+      dataWithNewBlock = {
+        ...dataWithNewBlock,
+        tasks: [
+          {
+            title: '',
+            description: task1,
+            state: 'pending',
+            type: task1.length ? 'work' : 'rest',
+          },
+
+          {
+            title: '',
+            description: task2,
+            state: 'pending',
+            type: task2.length ? 'work' : 'rest',
+          },
+        ],
+      };
+    }
+
+    sendData(dataWithNewBlock);
+    setShowModal(false);
+  };
+
   return (
     <Modal isOpen={showModal} size="lg" onClose={() => setShowModal(false)}>
       <Modal.Content backgroundColor="info.10" maxWidth="80%">
-        <Modal.Header>{data.hour}</Modal.Header>
+        <Modal.Header alignItems="center">{data.hour}</Modal.Header>
         <Modal.Body>
-          <VStack space="12">
+          <VStack space="4">
             <CustomInput value={task1} onChange={setTask1} />
             <CustomInput value={task2} onChange={setTask2} />
-            <Button
-              backgroundColor="primary.200"
-              onPress={() => sendData(data)}>
+            <Button backgroundColor="primary.200" onPress={handleData}>
               Guardar
             </Button>
           </VStack>
