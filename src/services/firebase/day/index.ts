@@ -1,7 +1,7 @@
 import firestore from '@react-native-firebase/firestore';
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {formatMessage} from '../../../adapters';
-
+import {navigate} from '../../../navigation/main';
 import {
   QuerySnapshotDay,
   GetDayResponseService,
@@ -40,7 +40,8 @@ export const createDay = createAsyncThunk<any, DayData[]>(
 
     try {
       return await Promise.all(documentsPromises).then(res => {
-        thunkApi.dispatch(showToast(formatMessage('createDaySuccess')));
+        thunkApi.dispatch(showToast(formatMessage('createDaySuccess', '')));
+        navigate('Home', {});
       });
     } catch (err) {
       return thunkApi.rejectWithValue({err: 'loading data'});
